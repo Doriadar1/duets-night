@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ערב דואטים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Suez+One&family=Rubik:wght@400;600;800&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#ff3d8b; --hot:#ff1f6d; --rose:#ffb3cf; --gold:#ffd36b; --plum:#3a0a3f; --ink:#fff;
+  --bg1:#ff5fa2; --bg2:#a43ce0; --bg3:#ff9a5c;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{
+  font-family:Rubik,system-ui,sans-serif;color:var(--ink);overflow-x:hidden;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3),var(--bg1));
+  background-size:400% 400%;animation:bgshift 18s ease infinite;min-height:100dvh;
+}
+@keyframes bgshift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* floating hearts layer */
+#sky{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.fh{position:absolute;bottom:-60px;opacity:.75;animation:rise linear forwards;filter:drop-shadow(0 0 6px rgba(255,255,255,.6))}
+@keyframes rise{
+  0%{transform:translateY(0) translateX(0) rotate(0) scale(var(--s));opacity:0}
+  10%{opacity:.85}
+  50%{transform:translateY(-55vh) translateX(var(--dx)) rotate(20deg) scale(var(--s))}
+  100%{transform:translateY(-115vh) translateX(calc(var(--dx)*-1)) rotate(-20deg) scale(var(--s));opacity:0}
+}
+.spark{position:fixed;width:6px;height:6px;border-radius:50%;background:#fff;pointer-events:none;z-index:50;
+  box-shadow:0 0 10px #fff,0 0 20px var(--gold)}
+
+main{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:22px 16px 40px;min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center}
+
+header{text-align:center;margin-top:6px}
+.eng{font-family:Pacifico,cursive;font-size:20px;color:var(--gold);text-shadow:0 2px 0 var(--plum);letter-spacing:.5px}
+h1{font-family:"Suez One",serif;font-size:clamp(46px,14vw,72px);margin:0;line-height:1;
+  background:linear-gradient(180deg,#fff 30%,var(--rose));-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 4px 0 var(--hot)) drop-shadow(0 8px 18px rgba(58,10,63,.5));animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-6px)}}
+.sub{margin:8px 0 0;font-size:16px;opacity:.95}
+
+/* HOME */
+#home{display:flex;flex-direction:column;align-items:center;gap:22px;margin-top:26px;width:100%}
+.big{
+  position:relative;width:min(300px,78vw);aspect-ratio:1/1;border:0;cursor:pointer;background:none;padding:0;
+  animation:beat 1.3s ease-in-out infinite;
+}
+.big svg{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 14px 26px rgba(120,0,60,.55))}
+.big span{position:relative;display:block;font-family:"Suez One",serif;font-size:clamp(34px,10vw,46px);color:#fff;
+  text-shadow:0 3px 0 #b3004a,0 0 18px rgba(255,255,255,.6);margin-top:-8%}
+.big small{position:relative;display:block;font-size:15px;font-weight:600;opacity:.95;margin-top:4px}
+@keyframes beat{0%,100%{transform:scale(1)}14%{transform:scale(1.08)}28%{transform:scale(.98)}42%{transform:scale(1.05)}70%{transform:scale(1)}}
+.big:active{animation:none;transform:scale(.94)}
+.row{display:flex;gap:14px;width:100%;justify-content:center}
+.small{
+  flex:1;max-width:200px;border:0;border-radius:999px;padding:16px 10px;cursor:pointer;
+  font-family:"Suez One",serif;font-size:22px;color:var(--plum);
+  background:linear-gradient(180deg,#fff,var(--rose));box-shadow:0 6px 0 #c2307a,0 12px 22px rgba(58,10,63,.35);
+  transition:transform .15s}
+.small.up{background:linear-gradient(180deg,#fff7c9,var(--gold));box-shadow:0 6px 0 #d1891f,0 12px 22px rgba(58,10,63,.35)}
+.small:active{transform:translateY(4px);box-shadow:0 2px 0 #c2307a}
+.small em{font-style:normal;display:block;font-family:Rubik;font-size:13px;font-weight:600;opacity:.75}
+.count{font-size:14px;opacity:.85;text-align:center}
+
+/* RESULT */
+#result{display:none;flex-direction:column;align-items:center;gap:16px;margin-top:18px;width:100%}
+.mode{font-family:Pacifico,cursive;font-size:19px;color:var(--gold);text-shadow:0 2px 0 var(--plum)}
+.card{
+  position:relative;width:100%;max-width:440px;border-radius:26px;overflow:hidden;cursor:pointer;display:block;
+  border:5px solid #fff;box-shadow:0 0 0 4px var(--hot),0 20px 40px rgba(58,10,63,.55);text-decoration:none;color:#fff;
+  background:var(--plum)}
+.card img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;animation:kenburns 14s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08) translateY(-2%)}}
+.card.enter{animation:flipin .9s cubic-bezier(.2,.9,.3,1.3) both}
+@keyframes flipin{0%{transform:perspective(900px) rotateY(90deg) scale(.6);opacity:0}100%{transform:none;opacity:1}}
+.cap{position:absolute;inset:auto 0 0 0;padding:70px 18px 18px;
+  background:linear-gradient(0deg,rgba(58,10,63,.95),rgba(58,10,63,.6) 55%,transparent)}
+.song{font-family:"Suez One",serif;font-size:clamp(26px,8vw,36px);line-height:1.1;margin:0;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.song.ltr{direction:ltr;text-align:left}
+.artist{font-size:16px;margin:6px 0 0;opacity:.95}
+.artist.ltr{direction:ltr;text-align:left}
+.tap{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 14px;border-radius:999px;
+  background:rgba(255,255,255,.2);backdrop-filter:blur(4px);font-weight:600;font-size:15px;animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{50%{background:rgba(255,255,255,.38)}}
+.another{
+  border:0;border-radius:999px;padding:18px 34px;cursor:pointer;font-family:"Suez One",serif;font-size:26px;color:#fff;
+  background:linear-gradient(180deg,#ff6aa8,var(--hot));box-shadow:0 6px 0 #9e0040,0 14px 26px rgba(58,10,63,.45)}
+.another:active{transform:translateY(4px);box-shadow:0 2px 0 #9e0040}
+.back{background:none;border:0;color:#fff;font:600 16px Rubik;opacity:.9;cursor:pointer;text-decoration:underline;padding:6px}
+
+footer{margin-top:auto;padding-top:26px;font-size:13px;opacity:.8;text-align:center}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div id="sky"></div>
+<main>
+  <header>
+    <div class="eng">Duets Night</div>
+    <h1>ערב דואטים</h1>
+    <p class="sub">שניים שרים · כולם מתאהבים 💞</p>
+  </header>
+
+  <section id="home">
+    <button class="big" id="goAll" aria-label="תביא דואט">
+      <svg viewBox="0 0 100 92" aria-hidden="true"><defs>
+        <linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff7ab3"/><stop offset="1" stop-color="#e0004f"/></linearGradient>
+        <radialGradient id="hl" cx=".3" cy=".25" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+        <path d="M50 90 C20 68 2 50 2 28 C2 12 14 2 28 2 C38 2 46 8 50 16 C54 8 62 2 72 2 C86 2 98 12 98 28 C98 50 80 68 50 90Z" fill="url(#hg)" stroke="#fff" stroke-width="3"/>
+        <path d="M50 90 C20 68 2 50 2 28 C2 12 14 2 28 2 C38 2 46 8 50 16 C54 8 62 2 72 2 C86 2 98 12 98 28 C98 50 80 68 50 90Z" fill="url(#hl)"/>
+      </svg>
+      <span>תביא דואט</span><small>🎤 אחד אקראי 🎤</small>
+    </button>
+    <div class="row">
+      <button class="small up" id="goUp">תביא אפר<em>🕺 קצבי 💃</em></button>
+      <button class="small" id="goSlow">תביא סלואו<em>🌹 רומנטי 🕯️</em></button>
+    </div>
+    <div class="count" id="count"></div>
+  </section>
+
+  <section id="result">
+    <div class="mode" id="mode"></div>
+    <a class="card" id="card" target="_blank" rel="noopener">
+      <img id="photo" alt="">
+      <div class="cap">
+        <p class="song" id="song"></p>
+        <p class="artist" id="artist"></p>
+        <span class="tap" id="tap">👆 לחיצה על התמונה → אקורדים</span>
+      </div>
+    </a>
+    <button class="another" id="another">תביא דואט אחר 💘</button>
+    <button class="back" id="back">← חזרה להתחלה</button>
+  </section>
+
+  <footer>ערב ג׳אם · אוקטובר 2026 · עם הרבה אהבה ❤️</footer>
+</main>
+
+<script>
+const DATA = {"songs": [{"id": 1, "title": "זה כל הקסם", "artist": "נמרוד לב ואורלי פרל", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/1828_%D7%A0%D7%9E%D7%A8%D7%95%D7%93_%D7%9C%D7%91_%D7%95%D7%90%D7%95%D7%A8%D7%9C%D7%99_%D7%A4%D7%A8%D7%9C_-_%D7%96%D7%94_%D7%9B%D7%9C_%D7%94%D7%A7%D7%A1%D7%9D.html"}, {"id": 2, "title": "Don't Go Breaking My Heart", "artist": "Elton John & Kiki Dee", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/elton-john/dont-go-breaking-my-heart-chords-1034426"}, {"id": 3, "title": "Cut It Out", "artist": "Daniela Spector & Ben Spector", "tempo": "up", "he": false, "chords": "https://www.youtube.com/watch?v=IMu853QbXvA", "video": true}, {"id": 4, "title": "Islands in the Stream", "artist": "Dolly Parton & Kenny Rogers", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/kenny-rogers/islands-in-the-stream-chords-82137"}, {"id": 5, "title": "Shallow", "artist": "Lady Gaga & Bradley Cooper", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/misc-soundtrack/a-star-is-born-shallow-chords-2480119"}, {"id": 6, "title": "One", "artist": "Mary J. Blige & U2", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/u2/one-chords-1081745"}, {"id": 7, "title": "Don't Let the Sun Go Down on Me", "artist": "George Michael & Elton John", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/elton-john/dont-let-the-sun-go-down-on-me-chords-1065058"}, {"id": 8, "title": "Where the Wild Roses Grow", "artist": "Nick Cave & Kylie Minogue", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/nick-cave-the-bad-seeds/where-the-wild-roses-grow-chords-1691793"}, {"id": 9, "title": "Easy Lover", "artist": "Philip Bailey & Phil Collins", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/philip-bailey/easy-lover-chords-1455074"}, {"id": 10, "title": "Senza Una Donna", "artist": "Zucchero & Paul Young", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/zucchero/senza-una-donna-chords-88876"}, {"id": 11, "title": "You're the One That I Want", "artist": "John Travolta & Olivia Newton-John", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/misc-soundtrack/grease-youre-the-one-that-i-want-chords-78010"}, {"id": 12, "title": "Kids", "artist": "Robbie Williams & Kylie Minogue", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/robbie-williams/kids-chords-285"}, {"id": 13, "title": "Homeward Bound", "artist": "Simon & Garfunkel", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/simon-garfunkel/homeward-bound-chords-836418"}, {"id": 14, "title": "Hunger Strike", "artist": "Temple of the Dog", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/temple-of-the-dog/hunger-strike-chords-1109055"}, {"id": 15, "title": "I've Got a Feeling", "artist": "The Beatles", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/the-beatles/ive-got-a-feeling-chords-887785"}, {"id": 16, "title": "I Got You Babe", "artist": "Sonny & Cher", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/sonny-cher/i-got-you-babe-chords-1046804"}, {"id": 17, "title": "Somebody That I Used to Know", "artist": "Gotye & Kimbra", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/gotye/somebody-that-i-used-to-know-chords-1094597"}, {"id": 18, "title": "Die With a Smile", "artist": "Lady Gaga & Bruno Mars", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/lady-gaga/die-with-a-smile-chords-5389398"}, {"id": 19, "title": "You're So Vain", "artist": "Carly Simon", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/carly-simon/youre-so-vain-chords-845483"}, {"id": 20, "title": "When You're Gone", "artist": "Bryan Adams & Melanie C", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/bryan-adams/when-youre-gone-chords-59426"}, {"id": 21, "title": "Go Your Own Way", "artist": "Fleetwood Mac", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/fleetwood-mac/go-your-own-way-chords-1087275"}, {"id": 22, "title": "רק בשביל לקבל חיבוק", "artist": "איפה הילד ואיגי וקסמן", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/470_%D7%90%D7%99%D7%A4%D7%94_%D7%94%D7%99%D7%9C%D7%93_-_%D7%A8%D7%A7_%D7%91%D7%A9%D7%91%D7%99%D7%9C_%D7%9C%D7%A7%D7%91%D7%9C_%D7%97%D7%99%D7%91%D7%95%D7%A7.html"}, {"id": 23, "title": "שמתי לי פודרה", "artist": "אביתר בנאי ואפרת בן צור", "tempo": "up", "he": true, "chords": "https://www.tab4u.com/tabs/songs/239_%D7%90%D7%91%D7%99%D7%AA%D7%A8_%D7%91%D7%A0%D7%90%D7%99_%D7%95%D7%90%D7%A4%D7%A8%D7%AA_%D7%91%D7%9F_%D7%A6%D7%95%D7%A8_-_%D7%A9%D7%9E%D7%AA%D7%99_%D7%9C%D7%99_%D7%A4%D7%95%D7%93%D7%A8%D7%94.html"}, {"id": 24, "title": "חללית", "artist": "גזוז", "tempo": "up", "he": true, "chords": "https://www.tab4u.com/tabs/songs/4291_%D7%92%D7%96%D7%95%D7%96_-_%D7%97%D7%9C%D7%9C%D7%99%D7%AA.html"}, {"id": 25, "title": "אם כבר לבד", "artist": "החברים של נטאשה", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/1275_%D7%94%D7%97%D7%91%D7%A8%D7%99%D7%9D_%D7%A9%D7%9C_%D7%A0%D7%98%D7%90%D7%A9%D7%94_-_%D7%90%D7%9D_%D7%9B%D7%91%D7%A8_%D7%9C%D7%91%D7%93.html"}, {"id": 26, "title": "Burning Down the House", "artist": "Tom Jones & The Cardigans", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/tom-jones/burning-down-the-house-chords-1717967"}, {"id": 27, "title": "Home", "artist": "Edward Sharpe & The Magnetic Zeros", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/edward-sharpe-and-the-magnetic-zeros/home-chords-923641"}, {"id": 28, "title": "Young Folks", "artist": "Peter Bjorn and John", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/peter-bjorn-and-john/young-folks-chords-1125241"}, {"id": 29, "title": "שוב", "artist": "שמוליק קראוס וג'וזי כץ", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/4848_ג'וזי_כץ_ושמוליק_קראוס_-_שוב.html"}, {"id": 30, "title": "Under Pressure", "artist": "Queen & David Bowie", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/queen/under-pressure-chords-340629"}, {"id": 31, "title": "Love Shack", "artist": "The B-52's", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/the-b-52s/love-shack-chords-1905117"}, {"id": 32, "title": "Don't You Want Me", "artist": "The Human League", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/the-human-league/dont-you-want-me-chords-755262"}, {"id": 33, "title": "אינך יכולה", "artist": "החלונות הגבוהים", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/1280_%D7%94%D7%97%D7%9C%D7%95%D7%A0%D7%95%D7%AA_%D7%94%D7%92%D7%91%D7%95%D7%94%D7%99%D7%9D_-_%D7%90%D7%99%D7%A0%D7%9A_%D7%99%D7%9B%D7%95%D7%9C%D7%94.html"}, {"id": 34, "title": "I Want It That Way", "artist": "Backstreet Boys", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/backstreet-boys/i-want-it-that-way-chords-827123"}, {"id": 35, "title": "סוף העולם", "artist": "אביב גפן וברי סחרוף", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/209_%D7%90%D7%91%D7%99%D7%91_%D7%92%D7%A4%D7%9F_%D7%95%D7%91%D7%A8%D7%99_%D7%A1%D7%97%D7%A8%D7%95%D7%A3_-_%D7%A1%D7%95%D7%A3_%D7%94%D7%A2%D7%95%D7%9C%D7%9D.html"}, {"id": 36, "title": "Walk on the Wild Side", "artist": "Lou Reed", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/lou-reed/walk-on-the-wild-side-chords-459911"}, {"id": 37, "title": "Cheek to Cheek", "artist": "Ella Fitzgerald & Louis Armstrong", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/ella-fitzgerald/cheek-to-cheek-chords-814054"}, {"id": 38, "title": "California Dreamin'", "artist": "The Mamas & The Papas", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/the-mamas-the-papas/california-dreamin-chords-1720545"}, {"id": 39, "title": "Some Velvet Morning", "artist": "Nancy Sinatra & Lee Hazlewood", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/nancy-sinatra-lee-hazlewood/some-velvet-morning-chords-856159"}, {"id": 40, "title": "רוני", "artist": "גזוז", "tempo": "up", "he": true, "chords": "https://www.tab4u.com/tabs/songs/1046_%D7%92%D7%96%D7%95%D7%96_-_%D7%A8%D7%95%D7%A0%D7%99.html"}, {"id": 41, "title": "לא טוב היות האדם לבדו", "artist": "דני ליטני ויהודית רביץ", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/67028_מתי_כספי_-_לא_טוב_היות_אדם_לבדו.html"}, {"id": 42, "title": "ארץ טרופית יפה", "artist": "מתי כספי ויהודית רביץ", "tempo": "up", "he": true, "chords": "https://www.tab4u.com/tabs/songs/3155_%D7%9E%D7%AA%D7%99_%D7%9B%D7%A1%D7%A4%D7%99_%D7%95%D7%99%D7%94%D7%95%D7%93%D7%99%D7%AA_%D7%A8%D7%91%D7%99%D7%A5_-_%D7%90%D7%A8%D7%A5_%D7%98%D7%A8%D7%95%D7%A4%D7%99%D7%AA_%D7%99%D7%A4%D7%94.html"}, {"id": 43, "title": "זה הכל בשבילך", "artist": "דני סנדרסון ומזי כהן", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/1168_%D7%93%D7%A0%D7%99_%D7%A1%D7%A0%D7%93%D7%A8%D7%A1%D7%95%D7%9F_%D7%95%D7%9B%D7%95%D7%95%D7%A8%D7%AA_-_%D7%96%D7%94_%D7%94%D7%9B%D7%9C_%D7%91%D7%A9%D7%91%D7%99%D7%9C%D7%9A.html"}, {"id": 44, "title": "סמבה בשניים", "artist": "יהודית רביץ ומתי כספי", "tempo": "up", "he": true, "chords": "https://www.tab4u.com/tabs/songs/70461_%D7%9E%D7%AA%D7%99_%D7%9B%D7%A1%D7%A4%D7%99_%D7%95%D7%99%D7%94%D7%95%D7%93%D7%99%D7%AA_%D7%A8%D7%91%D7%99%D7%A5_-_%D7%A1%D7%9E%D7%91%D7%94_%D7%91%D7%A9%D7%A0%D7%99%D7%99%D7%9D.html"}, {"id": 45, "title": "דואט פרידה", "artist": "גלי עטרי ומני בגר", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/4162_%D7%92%D7%9C%D7%99_%D7%A2%D7%98%D7%A8%D7%99_%D7%95%D7%9E%D7%A0%D7%99_%D7%91%D7%92%D7%A8_-_%D7%93%D7%95%D7%90%D7%98_%D7%A4%D7%A8%D7%99%D7%93%D7%94.html"}, {"id": 46, "title": "This Mess We're In", "artist": "PJ Harvey & Thom Yorke", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/pj-harvey/this-mess-were-in-chords-1812833"}, {"id": 47, "title": "Eye in the Sky", "artist": "Red Band & Marina Maximilian", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/the-alan-parsons-project/eye-in-the-sky-chords-1090539"}, {"id": 48, "title": "כשזה עמוק", "artist": "קורין אלאל וענבל פרלמוטר", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/2244_אביתר_בנאי,_ענבל_פרלמוטר_וקורין_אלאל_-_כשזה_עמוק.html"}, {"id": 49, "title": "תרגיל בהתעוררות", "artist": "שלומי שבן וחוה אלברשטיין", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/5459_%D7%A9%D7%9C%D7%95%D7%9E%D7%99_%D7%A9%D7%91%D7%9F_-_%D7%AA%D7%A8%D7%92%D7%99%D7%9C_%D7%91%D7%94%D7%AA%D7%A2%D7%95%D7%A8%D7%A8%D7%95%D7%AA.html"}, {"id": 50, "title": "והגשם יבוא", "artist": "גידי גוב ומיקה קרני", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/69528_%D7%92%D7%99%D7%93%D7%99_%D7%92%D7%95%D7%91_%D7%95%D7%9E%D7%99%D7%A7%D7%94_%D7%A7%D7%A8%D7%A0%D7%99_-_%D7%95%D7%94%D7%92%D7%A9%D7%9D_%D7%99%D7%91%D7%95%D7%90.html"}, {"id": 51, "title": "Ain't No Mountain High Enough", "artist": "Marvin Gaye & Tammi Terrell", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/marvin-gaye/aint-no-mountain-high-enough-chords-660108"}, {"id": 52, "title": "אצלך בעולם", "artist": "מאיר בנאי ואביתר בנאי", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/3821_%D7%90%D7%91%D7%99%D7%AA%D7%A8_%D7%91%D7%A0%D7%90%D7%99_%D7%95%D7%9E%D7%90%D7%99%D7%A8_%D7%91%D7%A0%D7%90%D7%99_-_%D7%90%D7%A6%D7%9C%D7%9A_%D7%91%D7%A2%D7%95%D7%9C%D7%9D.html"}, {"id": 53, "title": "הבלדה על אביר החופש ובת גלים", "artist": "קרולינה ואורי בראונר כנרות", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/4144_%D7%A7%D7%A8%D7%95%D7%9C%D7%99%D7%A0%D7%94_%D7%95%D7%90%D7%95%D7%A8%D7%99_%D7%91%D7%A8%D7%90%D7%95%D7%A0%D7%A8_-_%D7%94%D7%91%D7%9C%D7%93%D7%94_%D7%A2%D7%9C_%D7%90%D7%91%D7%99%D7%A8_%D7%94%D7%97%D7%95%D7%A4%D7%A9_%D7%95%D7%91%D7%AA_%D7%92%D7%9C%D7%99%D7%9D.html"}, {"id": 54, "title": "Comfortably Numb", "artist": "Pink Floyd", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/pink-floyd/comfortably-numb-chords-1087215"}, {"id": 55, "title": "ילדה קטנה", "artist": "החלונות הגבוהים", "tempo": "up", "he": true, "chords": "https://www.tab4u.com/tabs/songs/1002_ג'וזי_כץ_והחלונות_הגבוהים_-_ילדה_קטנה.html"}, {"id": 56, "title": "והפעם שיר אהבה", "artist": "טיפקס ורונית", "tempo": "up", "he": true, "chords": "https://www.tab4u.com/tabs/songs/1522_%D7%98%D7%99%D7%A4%D7%A7%D7%A1_%D7%95%D7%A8%D7%95%D7%A0%D7%99%D7%AA_-_%D7%95%D7%94%D7%A4%D7%A2%D7%9D_%D7%A9%D7%99%D7%A8_%D7%90%D7%94%D7%91%D7%94.html"}, {"id": 57, "title": "Summer Nights", "artist": "John Travolta & Olivia Newton-John", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/misc-soundtrack/grease-summer-nights-chords-414157"}, {"id": 58, "title": "American Boy", "artist": "Estelle & Kanye West", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/estelle/american-boy-chords-756247"}, {"id": 59, "title": "The Boy Is Mine", "artist": "Brandy & Monica", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/brandy/the-boy-is-mine-chords-2203007"}, {"id": 60, "title": "פרצופה של המדינה", "artist": "תיסלם", "tempo": "up", "he": true, "chords": "https://www.tab4u.com/tabs/songs/4870_%D7%AA%D7%99%D7%A1%D7%9C%D7%9D_-_%D7%A4%D7%A8%D7%A6%D7%95%D7%A4%D7%94_%D7%A9%D7%9C_%D7%94%D7%9E%D7%93%D7%99%D7%A0%D7%94.html"}, {"id": 61, "title": "Monday, Monday", "artist": "The Mamas & The Papas", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/the-mamas-the-papas/monday-monday-chords-1050585"}, {"id": 62, "title": "John Wayne", "artist": "Cigarettes After Sex", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/cigarettes-after-sex/john-wayne-chords-2038187"}, {"id": 63, "title": "The Only Living Boy in New York", "artist": "Simon & Garfunkel", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/simon-garfunkel/the-only-living-boy-in-new-york-chords-471042"}, {"id": 64, "title": "אחלה לוץ", "artist": "מופע הארנבות של ד\"ר קספר", "tempo": "up", "he": true, "chords": "https://www.youtube.com/results?search_query=%D7%9E%D7%95%D7%A4%D7%A2+%D7%94%D7%90%D7%A8%D7%A0%D7%91%D7%95%D7%AA+%D7%A9%D7%9C+%D7%93%22%D7%A8+%D7%A7%D7%A1%D7%A4%D7%A8+%D7%90%D7%97%D7%9C%D7%94+%D7%9C%D7%95%D7%A5", "video": true}, {"id": 65, "title": "שיר אהבה בדואי", "artist": "דויד ברוזה ויהונתן גפן", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/1108_%D7%93%D7%99%D7%95%D7%99%D7%93_%D7%91%D7%A8%D7%95%D7%96%D7%94_-_%D7%A9%D7%99%D7%A8_%D7%90%D7%94%D7%91%D7%94_%D7%91%D7%93%D7%95%D7%90%D7%99.html"}, {"id": 66, "title": "אין קץ לילדות", "artist": "פורטיסחרוף", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/888_%D7%91%D7%A8%D7%99_%D7%A1%D7%97%D7%A8%D7%95%D7%A3_%D7%95%D7%A8%D7%9E%D7%99_%D7%A4%D7%95%D7%A8%D7%98%D7%99%D7%A1_-_%D7%90%D7%99%D7%9F_%D7%A7%D7%A5_%D7%9C%D7%99%D7%9C%D7%93%D7%95%D7%AA_%28%D7%91%D7%A6%D7%94%D7%A8%D7%99_%D7%94%D7%99%D7%95%D7%9D%29.html"}, {"id": 67, "title": "ממתק", "artist": "פורטיסחרוף", "tempo": "up", "he": true, "chords": "https://www.tab4u.com/tabs/songs/891_%D7%91%D7%A8%D7%99_%D7%A1%D7%97%D7%A8%D7%95%D7%A3_%D7%95%D7%A8%D7%9E%D7%99_%D7%A4%D7%95%D7%A8%D7%98%D7%99%D7%A1_-_%D7%9E%D7%9E%D7%AA%D7%A7.html"}, {"id": 68, "title": "Twist and Shout", "artist": "The Beatles", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/the-beatles/twist-and-shout-chords-122350"}, {"id": 69, "title": "לשיר איתך", "artist": "בועז שרעבי ושושנה דמארי", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/7416_%D7%91%D7%A2%D7%96_%D7%A9%D7%A8%D7%A2%D7%91%D7%99_-_%D7%9C%D7%A9%D7%99%D7%A8_%D7%90%D7%99%D7%AA%D7%9A.html"}, {"id": 70, "title": "A Whole New World", "artist": "Lea Salonga & Brad Kane", "tempo": "slow", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/peabo-bryson/a-whole-new-world-chords-2566428"}, {"id": 71, "title": "זמר נוגה", "artist": "החלונות הגבוהים", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/990_%D7%94%D7%97%D7%9C%D7%95%D7%A0%D7%95%D7%AA_%D7%94%D7%92%D7%91%D7%95%D7%94%D7%99%D7%9D_-_%D7%96%D7%9E%D7%A8_%D7%A0%D7%95%D7%92%D7%94.html"}, {"id": 72, "title": "Help!", "artist": "The Beatles", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/the-beatles/help-chords-17269"}, {"id": 73, "title": "Dancing in the Street", "artist": "David Bowie & Mick Jagger", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/david-bowie/dancing-in-the-street-chords-17009"}, {"id": 74, "title": "Love Is an Open Door", "artist": "Kristen Bell & Santino Fontana", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/misc-cartoons/frozen-love-is-an-open-door-chords-1454545"}, {"id": 75, "title": "Hakuna Matata", "artist": "The Lion King", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/misc-cartoons/the-lion-king-hakuna-matata-chords-153275"}, {"id": 76, "title": "As", "artist": "George Michael & Mary J. Blige", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/george-michael/as-chords-986573"}, {"id": 77, "title": "Lady Marmalade", "artist": "Christina Aguilera, Lil' Kim, Mýa & P!nk", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/christina-aguilera/lady-marmalade-chords-626203"}, {"id": 78, "title": "Ebony and Ivory", "artist": "Paul McCartney & Stevie Wonder", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/paul-mccartney/ebony-and-ivory-chords-1227268"}, {"id": 79, "title": "I Knew You Were Waiting (For Me)", "artist": "George Michael & Aretha Franklin", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/aretha-franklin/i-knew-you-were-waiting-for-me-chords-1400184"}, {"id": 80, "title": "What Have I Done to Deserve This?", "artist": "Pet Shop Boys & Dusty Springfield", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/pet-shop-boys/what-have-i-done-to-deserve-this-chords-1104238"}, {"id": 81, "title": "(I've Had) The Time of My Life", "artist": "Bill Medley & Jennifer Warnes", "tempo": "up", "he": false, "chords": "https://tabs.ultimate-guitar.com/tab/misc-soundtrack/dirty-dancing-ive-had-the-time-of-my-life-chords-1087634"}, {"id": 82, "title": "מילים יפות", "artist": "גזוז", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/4308_%D7%92%D7%96%D7%95%D7%96_-_%D7%9E%D7%99%D7%9C%D7%99%D7%9D_%D7%99%D7%A4%D7%95%D7%AA.html"}, {"id": 83, "title": "צער לך", "artist": "אריק איינשטיין, יוני רכטר ויהודית רביץ", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/3603_%D7%90%D7%A8%D7%99%D7%A7_%D7%90%D7%99%D7%99%D7%A0%D7%A9%D7%98%D7%99%D7%99%D7%9F_%D7%95%D7%99%D7%94%D7%95%D7%93%D7%99%D7%AA_%D7%A8%D7%91%D7%99%D7%A5_-_%D7%A6%D7%A2%D7%A8_%D7%9C%D7%9A.html"}, {"id": 84, "title": "בלדה בין כוכבים", "artist": "פופיק ארנון", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/2221_%D7%90%D7%93%D7%9D_%D7%95%D7%A4%D7%95%D7%A4%D7%99%D7%A7_%D7%90%D7%A8%D7%A0%D7%95%D7%9F_-_%D7%91%D7%9C%D7%93%D7%94_%D7%91%D7%99%D7%9F_%D7%9B%D7%95%D7%9B%D7%91%D7%99%D7%9D.html"}, {"id": 85, "title": "מה זאת אהבה", "artist": "מתי כספי וריקי גל", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/3139_%D7%9E%D7%AA%D7%99_%D7%9B%D7%A1%D7%A4%D7%99_%D7%95%D7%A8%D7%99%D7%A7%D7%99_%D7%92%D7%9C_-_%D7%9E%D7%94_%D7%96%D7%90%D7%AA_%D7%90%D7%94%D7%91%D7%94.html"}, {"id": 86, "title": "תחת עץ האהבה", "artist": "נורית גלרון ויוסי בנאי", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/71118_%D7%99%D7%95%D7%A1%D7%99_%D7%91%D7%A0%D7%90%D7%99_%D7%95%D7%A0%D7%95%D7%A8%D7%99%D7%AA_%D7%92%D7%9C%D7%A8%D7%95%D7%9F_-_%D7%AA%D7%97%D7%AA_%D7%A2%D7%A5_%D7%94%D7%90%D7%94%D7%91%D7%94.html"}, {"id": 87, "title": "קטורנה מסאלה", "artist": "אתניקס וזהבה בן", "tempo": "up", "he": true, "chords": "https://www.youtube.com/watch?v=D7BfTVJkC8Q", "video": true}, {"id": 88, "title": "שלום עליכם", "artist": "מתי כספי ובועז שרעבי", "tempo": "slow", "he": true, "chords": "https://www.tab4u.com/tabs/songs/66475_%D7%9E%D7%AA%D7%99_%D7%9B%D7%A1%D7%A4%D7%99_-_%D7%A9%D7%9C%D7%95%D7%9D_%D7%A2%D7%9C%D7%99%D7%9B%D7%9D.html"}], "photos": ["01_dori_gulli.jpg", "02_ariel_dvorka.jpg", "03_ran_hadas.jpg", "04_roni_tsvia.jpg", "05_dori_hadas.jpg", "06_avi_dvorka.jpg", "07_ben_gulli.jpg", "08_joker_tsvia.jpg", "09_shuki_hadas.jpg", "10_dori_ben.jpg", "11_ran_avi.jpg", "12_dori_tsvia.jpg", "13_ariel_gulli.jpg", "14_roni_dvorka.jpg", "15_avi_hadas.jpg", "16_joker_shuki.jpg", "17_ben_tsvia.jpg", "18_dori_dvorka.jpg", "19_ran_gulli.jpg", "20_roni_ariel.jpg"]};
+const BASE = "couples/";
+const $ = id => document.getElementById(id);
+const store = {
+  get(k){ try{ return JSON.parse(localStorage.getItem(k)) }catch(e){ return null } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)) }catch(e){} }
+};
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+// played songs are remembered so nothing repeats until the whole pool is used
+let played = new Set(store.get("duets.played") || []);
+let photoQ = [];
+let mode = "all";
+
+function pool(m){ return DATA.songs.filter(s => m === "all" || s.tempo === m); }
+function nextSong(m){
+  let left = pool(m).filter(s => !played.has(s.id));
+  if (!left.length) { pool(m).forEach(s => played.delete(s.id)); left = pool(m); }
+  const s = left[Math.floor(Math.random() * left.length)];
+  played.add(s.id); store.set("duets.played", [...played]);
+  return s;
+}
+function nextPhoto(){
+  if (!photoQ.length) photoQ = shuffle(DATA.photos);
+  return photoQ.pop();
+}
+const isHe = t => /[֐-׿]/.test(t);
+const LABEL = {all: "♥ דואט אקראי ♥", up: "♪ דואט אפר ♪", slow: "♡ דואט סלואו ♡"};
+
+function show(m){
+  mode = m;
+  const s = nextSong(m), p = nextPhoto();
+  $("mode").textContent = LABEL[m];
+  $("photo").src = BASE + p;
+  $("song").textContent = s.title; $("song").className = "song" + (isHe(s.title) ? "" : " ltr");
+  $("artist").textContent = s.artist; $("artist").className = "artist" + (isHe(s.artist) ? "" : " ltr");
+  $("card").href = s.chords;
+  $("tap").textContent = s.video ? "👆 לחיצה על התמונה → לשיר (אין אקורדים ברשת)" : "👆 לחיצה על התמונה → אקורדים";
+  $("home").style.display = "none"; $("result").style.display = "flex";
+  const c = $("card"); c.classList.remove("enter"); void c.offsetWidth; c.classList.add("enter");
+  window.scrollTo({top: 0, behavior: "smooth"});
+  updateCount();
+}
+function updateCount(){
+  const left = DATA.songs.filter(s => !played.has(s.id)).length;
+  $("count").textContent = `${DATA.songs.length} דואטים · נשארו ${left} שעוד לא שרנו`;
+}
+
+// heart burst on every tap
+function burst(x, y){
+  const em = ["💖","💕","💘","✨","🌹","💗"];
+  for (let i = 0; i < 14; i++) {
+    const d = document.createElement("div");
+    d.textContent = em[i % em.length];
+    d.style.cssText = `position:fixed;left:${x}px;top:${y}px;font-size:${18+Math.random()*16}px;pointer-events:none;z-index:60;transition:transform .9s cubic-bezier(.1,.8,.3,1),opacity .9s`;
+    document.body.appendChild(d);
+    const a = Math.random() * Math.PI * 2, r = 80 + Math.random() * 110;
+    requestAnimationFrame(() => { d.style.transform = `translate(${Math.cos(a)*r}px,${Math.sin(a)*r - 40}px) rotate(${Math.random()*80-40}deg)`; d.style.opacity = 0; });
+    setTimeout(() => d.remove(), 950);
+  }
+}
+function go(m){ return e => { burst(e.clientX || innerWidth/2, e.clientY || innerHeight/2); setTimeout(() => show(m), 220); }; }
+$("goAll").onclick = go("all"); $("goUp").onclick = go("up"); $("goSlow").onclick = go("slow");
+$("another").onclick = e => { burst(e.clientX, e.clientY); show(mode); };
+$("back").onclick = () => { $("result").style.display = "none"; $("home").style.display = "flex"; };
+$("card").addEventListener("click", e => burst(e.clientX, e.clientY));
+
+// floating hearts in the sky
+const sky = $("sky"), HEARTS = ["❤️","💖","💕","💗","💘","🌸","✨"];
+function spawn(){
+  const h = document.createElement("div");
+  h.className = "fh"; h.textContent = HEARTS[Math.floor(Math.random()*HEARTS.length)];
+  const dur = 9 + Math.random() * 9;
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.fontSize = (16 + Math.random() * 26) + "px";
+  h.style.setProperty("--dx", (Math.random() * 80 - 40) + "px");
+  h.style.setProperty("--s", (0.6 + Math.random() * 0.8).toFixed(2));
+  h.style.animationDuration = dur + "s";
+  sky.appendChild(h); setTimeout(() => h.remove(), dur * 1000);
+}
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) { for (let i = 0; i < 8; i++) setTimeout(spawn, i * 500); setInterval(spawn, 900); }
+
+// preload photos
+DATA.photos.forEach(p => { const i = new Image(); i.src = BASE + p; });
+updateCount();
+</script>
+</body>
+</html>
