@@ -66,31 +66,35 @@ h1{font-family:"Suez One",serif;font-size:clamp(46px,14vw,72px);margin:0;line-he
 .small em{font-style:normal;display:block;font-family:Rubik;font-size:13px;font-weight:600;opacity:.75}
 .count{font-size:14px;opacity:.85;text-align:center}
 
-/* RESULT */
-#result{display:none;flex-direction:column;align-items:center;gap:16px;margin-top:18px;width:100%}
-.mode{font-family:Pacifico,cursive;font-size:19px;color:var(--gold);text-shadow:0 2px 0 var(--plum)}
-.card{
-  position:relative;width:100%;max-width:440px;border-radius:26px;overflow:hidden;cursor:pointer;display:block;
-  border:5px solid #fff;box-shadow:0 0 0 4px var(--hot),0 20px 40px rgba(58,10,63,.55);text-decoration:none;color:#fff;
-  background:var(--plum)}
-.card img{display:block;width:100%;height:auto;animation:kenburns 14s ease-in-out infinite alternate}
-@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08) translateY(-2%)}}
-.card.enter{animation:flipin .9s cubic-bezier(.2,.9,.3,1.3) both}
-@keyframes flipin{0%{transform:perspective(900px) rotateY(90deg) scale(.6);opacity:0}100%{transform:none;opacity:1}}
-.cap{position:absolute;inset:auto 0 0 0;padding:70px 18px 18px;
-  background:linear-gradient(0deg,rgba(58,10,63,.95),rgba(58,10,63,.6) 55%,transparent)}
-.song{font-family:"Suez One",serif;font-size:clamp(26px,8vw,36px);line-height:1.1;margin:0;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+/* RESULT — full screen photo */
+#result{display:none;position:fixed;inset:0;z-index:20;background:#1a0420;overflow:hidden}
+.card{position:absolute;inset:0;display:block;overflow:hidden;cursor:pointer;color:#fff;text-decoration:none}
+.bg{position:absolute;inset:-60px;background-size:cover;background-position:center;
+  filter:blur(30px) brightness(.55) saturate(1.4)}
+.card img{position:absolute;top:0;left:0;width:100%;height:min(100dvh,132vw);object-fit:cover;object-position:50% 40%;
+  -webkit-mask-image:linear-gradient(180deg,#000 72%,transparent);mask-image:linear-gradient(180deg,#000 72%,transparent);
+  animation:kenburns 14s ease-in-out infinite alternate;transform-origin:50% 30%}
+@media (min-aspect-ratio:4/5){.card img{height:100%;object-fit:contain;-webkit-mask-image:none;mask-image:none}}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.05)}}
+.card.enter{animation:zoomin .8s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes zoomin{0%{transform:scale(1.25);opacity:0;filter:blur(8px)}100%{transform:none;opacity:1;filter:none}}
+.cap{position:absolute;inset:auto 0 0 0;padding:90px 20px calc(110px + env(safe-area-inset-bottom));
+  background:linear-gradient(0deg,rgba(40,4,45,.97),rgba(40,4,45,.75) 55%,transparent)}
+.song{font-family:"Suez One",serif;font-size:clamp(28px,8.5vw,44px);line-height:1.1;margin:0;text-shadow:0 2px 10px rgba(0,0,0,.6)}
 .song.ltr{direction:ltr;text-align:left}
-.artist{font-size:16px;margin:6px 0 0;opacity:.95}
+.artist{font-size:17px;margin:8px 0 0;opacity:.95}
 .artist.ltr{direction:ltr;text-align:left}
 .tap{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 14px;border-radius:999px;
   background:rgba(255,255,255,.2);backdrop-filter:blur(4px);font-weight:600;font-size:15px;animation:nudge 1.6s ease-in-out infinite}
 @keyframes nudge{50%{background:rgba(255,255,255,.38)}}
-.another{
-  border:0;border-radius:999px;padding:18px 34px;cursor:pointer;font-family:"Suez One",serif;font-size:26px;color:#fff;
-  background:linear-gradient(180deg,#ff6aa8,var(--hot));box-shadow:0 6px 0 #9e0040,0 14px 26px rgba(58,10,63,.45)}
-.another:active{transform:translateY(4px);box-shadow:0 2px 0 #9e0040}
-.back{background:none;border:0;color:#fff;font:600 16px Rubik;opacity:.9;cursor:pointer;text-decoration:underline;padding:6px}
+.mode{position:absolute;top:calc(14px + env(safe-area-inset-top));left:0;right:0;text-align:center;pointer-events:none;
+  font-family:Pacifico,cursive;font-size:19px;color:var(--gold);text-shadow:0 2px 0 var(--plum),0 0 12px rgba(0,0,0,.6)}
+.another{position:absolute;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translateX(-50%);white-space:nowrap;
+  border:0;border-radius:999px;padding:16px 32px;cursor:pointer;font-family:"Suez One",serif;font-size:25px;color:#fff;
+  background:linear-gradient(180deg,#ff6aa8,var(--hot));box-shadow:0 6px 0 #9e0040,0 14px 26px rgba(0,0,0,.45)}
+.another:active{transform:translate(-50%,4px);box-shadow:0 2px 0 #9e0040}
+.back{position:absolute;top:calc(10px + env(safe-area-inset-top));right:12px;border:0;border-radius:999px;cursor:pointer;
+  padding:8px 14px;font:600 15px Rubik;color:#fff;background:rgba(0,0,0,.35);backdrop-filter:blur(4px)}
 
 footer{margin-top:auto;padding-top:26px;font-size:13px;opacity:.8;text-align:center}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
@@ -123,8 +127,8 @@ footer{margin-top:auto;padding-top:26px;font-size:13px;opacity:.8;text-align:cen
   </section>
 
   <section id="result">
-    <div class="mode" id="mode"></div>
     <a class="card" id="card" target="_blank" rel="noopener">
+      <div class="bg" id="bg"></div>
       <img id="photo" alt="">
       <div class="cap">
         <p class="song" id="song"></p>
@@ -132,8 +136,9 @@ footer{margin-top:auto;padding-top:26px;font-size:13px;opacity:.8;text-align:cen
         <span class="tap" id="tap">👆 לחיצה על התמונה → אקורדים</span>
       </div>
     </a>
+    <div class="mode" id="mode"></div>
     <button class="another" id="another">תביא דואט אחר 💘</button>
-    <button class="back" id="back">← חזרה להתחלה</button>
+    <button class="back" id="back">→ חזרה</button>
   </section>
 
   <footer>ערב ג׳אם · אוקטובר 2026 · עם הרבה אהבה ❤️</footer>
@@ -184,12 +189,12 @@ function show(m){
   mode = m;
   const s = nextSong(m), p = nextPhoto();
   $("mode").textContent = LABEL[m];
-  $("photo").src = BASE + p;
+  $("photo").src = BASE + p; $("bg").style.backgroundImage = `url("${BASE + p}")`;
   $("song").textContent = s.title; $("song").className = "song" + (isHe(s.title) ? "" : " ltr");
   $("artist").textContent = "🎤 " + s.artist; $("artist").className = "artist" + (isHe(s.artist) ? "" : " ltr");
   $("card").href = s.chords;
   $("tap").textContent = s.video ? "👆 לחיצה על התמונה → לשיר (אין אקורדים ברשת)" : "👆 לחיצה על התמונה → אקורדים";
-  $("home").style.display = "none"; $("result").style.display = "flex";
+  $("home").style.display = "none"; $("result").style.display = "block"; document.body.style.overflow = "hidden";
   const c = $("card"); c.classList.remove("enter"); void c.offsetWidth; c.classList.add("enter");
   window.scrollTo({top: 0, behavior: "smooth"});
   updateCount();
@@ -215,7 +220,7 @@ function burst(x, y){
 function go(m){ return e => { burst(e.clientX || innerWidth/2, e.clientY || innerHeight/2); setTimeout(() => show(m), 220); }; }
 $("goAll").onclick = go("all"); $("goUp").onclick = go("up"); $("goSlow").onclick = go("slow");
 $("another").onclick = e => { burst(e.clientX, e.clientY); show(mode); };
-$("back").onclick = () => { $("result").style.display = "none"; $("home").style.display = "flex"; };
+$("back").onclick = () => { $("result").style.display = "none"; document.body.style.overflow = ""; $("home").style.display = "flex"; };
 $("card").addEventListener("click", e => burst(e.clientX, e.clientY));
 
 // floating hearts in the sky
